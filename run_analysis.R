@@ -9,73 +9,53 @@ downloadFILE <- function()
 }
 
 #downloadFILE()
+download_date <- file.info('../UCI_HAR_Dataset/activity_labels.txt')$ctime
 
-# Loading activity labels
+#Quick function to print the name of the dataframe and the number of columns and rows
+print_col_row <- function(dataframe)
+{
+	print(paste('Data frame name:', attr(dataframe, 'df_name'), 'Number of columns:', ncol(dataframe), 'number of rows:', nrow(dataframe), sep=' '))
+}
+
+# Loading activity labels and setting name of object to df_name 
 activity_labels <- read.csv('../UCI_HAR_Dataset/activity_labels.txt', header=F, sep=' ')
-#names(activity_labels) <- c('ActivityID', 'Activity')
-#print(activity_labels)
+names(activity_labels) <- c('ActivityID', 'Activity')
+attr(activity_labels, 'df_name') <- 'activity_labels'
 
+# Loading feature labels  Note: there are 561 features (columns)
 feature_labels <- read.csv('../UCI_HAR_Dataset/features.txt', header=F, sep=' ')
-#feature_labels
-#features <- unique(unlist(feature_labels$V2, use.names = FALSE))
-#features
+attr(feature_labels, 'df_name') <- 'feature_labels'
 
+# Loading subjects. There are 7532 observations 
 subjects <- read.csv('../UCI_HAR_Dataset/train/subject_train.txt', header=F, sep=' ')
 names(subjects) <- 'subjects'
-#print(subjects)
-#print(nrow(subjects))
-#print(ncol(subjects))
+attr(subjects, 'df_name') <- 'subjects'
 
+# Loading training activities. There are 7532 observations 
 training_y <- read.csv('../UCI_HAR_Dataset/train/y_train.txt', header=F, sep=' ')
 names(training_y) <- 'activity'
-#print(names(training_y))
-#print(c('col', ncol(training_y)))
-#print(c('row', nrow(training_y)))
+attr(training_y, 'df_name') <- 'training_y'
 
+info <- data.frame(activity_id = activity_labels$ActivityID, activity_desc = activity_labels$Activity)
+id <- match(training_y$activity, info$activity_id) #info[id, 2] will give me the column with activity description names only
 
-info <- data.frame(activity_id = 1:6, desc = c('WALKING', 'WALKING_UPSTAIRS', 'WALKING_DOWNSTAIRS', 'SITTING', 'STANDING', 'LAYING'))
-id <- match(training_y$activity, info$activity_id)
-
-training <- data.frame(subject_id = subjects$subjects, activity = info[id,])
-names(training) <- c('subject_id', 'activity_id', 'activity_desc')
-#ncol(training)
-#nrow(training)
-#names(training)
-#training
+# Creating dataframe to hold subject order and activity
+complete_df <- data.frame(subject_id = subjects$subjects, activity = info[id,2])
 
 # Load training data
-training_X <- read.table('temp', header=F)
-#training_X <- read.table('../UCI_HAR_Dataset/train/X_train_original.txt', header=F) #, sep=' ', fill=F) # Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  : line 2 did not have 662 elements
-#feature_list <- as.list(feature_labels$V2)
+###training_X <- read.table('temp', header=F)
+training_X <- read.table('../UCI_HAR_Dataset/train/X_train_original.txt', header=F) #, sep=' ', fill=F) # Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  : line 2 did not have 662 elements
 feature_list <- as.character(feature_labels$V2)
-#as.character(feature_list[1,])
-#feature_list
-
+names(training_X) <- feature_list
 #names(training_X)
 
-#for (i in 1:nrow(feature_labels))
-#{
-#	#print(feature_labels$V2[[i]])
-#	names(training_X[, i]) <- feature_labels$V2[[i]]
-#	#print(i)
-#}
-#
-names(training_X) <- feature_list
-names(training_X)
-
-
-#for (t in 1:training_X[, 
-#print(c('number of columns', ncol(training_X)))
-#print(c('number of rows', nrow(training_X)))
-#pr
-
-#count = 1
-#for (f in feature_labels$V2)
-#{
-#	#print(f)
-#	f
-	
-#}
-#print(training_X)
-#print(class(training_X[1, ]))
-#ncol(training_X[1, ])
+complete_df <- cbind(complete_df, training_X)
+attr(complete_df, 'df_name') <- 'complete_df'
+#complete_df <- cbind(complete_df, training_X[-2])
+print_col_row(complete_df)
+#complete
+##training <- training[-c(1:7352,2)]
+#write.table(training, file='tidy_project_data.txt', row.name=FALSE)
+###for (t in 1:training_X[, 
+###print(c('number of columns', ncol(training_X)))
+###print(c('number of rows', nrow(training_X)))
