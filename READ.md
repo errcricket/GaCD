@@ -26,6 +26,6 @@
 * tidy_project_data.txt 
 
 #Additional info
-* The `README.txt`, contains experiment information
+* The `README.txt` from the zipped directory contains experiment information
 * `Inertial Signals` folder is not used in this analysis.
 * `code_book.md` contains additional info on `run_analysis_R` script
