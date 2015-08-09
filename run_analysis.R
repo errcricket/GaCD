@@ -2,17 +2,16 @@ options(width=9999)
 library(plyr)
 library(reshape2)
 
+# Loading feature labels  Note: there are 561 features (columns)
+feature_labels <- read.csv('features.txt', header=F, sep=' ')
+
 # Get only the mean and standard deviation features from feature.txt file
-features_2 <- read.table('features.txt', header=F)
-kept_feature_column <- grep('.*mean.*|.*std.*', features_2$V2, ignore.case=T)
-kept_features <- levels(droplevels(features_2$V2[kept_feature_column]))
+kept_feature_column <- grep('.*mean.*|.*std.*', feature_labels$V2, ignore.case=T)
+kept_features <- levels(droplevels(feature_labels$V2[kept_feature_column]))
 
 # Loading activity labels and setting name of object to df_name 
 activity_labels <- read.csv('activity_labels.txt', header=F, sep=' ')
 names(activity_labels) <- c('ActivityID', 'Activity')
-
-# Loading feature labels  Note: there are 561 features (columns)
-feature_labels <- read.csv('features.txt', header=F, sep=' ')
 
 # Loading subjects. There are 7532 observations 
 subjects_training <- read.csv('subject_train.txt', header=F, sep=' ')
