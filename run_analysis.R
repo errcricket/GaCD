@@ -14,13 +14,7 @@ kept_features <- factor(unique(unlist(desired_features$saved_features, use.names
 
 features_2 <- read.table('../UCI_HAR_Dataset/features.txt', header=F)
 #features_2
-kept_features2 <- grep(c('mean', 'std'), names(features_2$V2))
-
-#kept_features
-#print('')
-kept_features2
-#print('done')
-
+kept_features2 <- grep('.*mean.* | .*std.*', names(features_2$V2))
 
 # Loading activity labels and setting name of object to df_name 
 grep(c('mean', 'std'), names(
