@@ -3,10 +3,10 @@
 The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. 
 
 ## Dataset
-Obtained datasets from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip -- which containins test and training data. 
+Obtained datasets from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip -- which contains test and training data. 
 
 ## Goals
-The goal of this R script was to create one tidy data set for the average of each variable for each subject.
+The goal of R script is to create one tidy data set for the average of each variable for each subject.
 
 ## Files
 
@@ -39,7 +39,7 @@ You should create one R script called run_analysis.R that does the following.
 4. Appropriately labels the data set with descriptive variable names. 
 	* uses label names obtained from `UCI_HAR_Dataset/features.txt` file
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-	* uses melt & dcast to find the mean values for selected columns (step 4). reshape2 package required
+	* uses melt & dcast to find the mean values for selected columns (step 4). `reshape2` package required
 6. Write tidy dataset to file 
 	* uses write.table to save output of step 5 to file
 Note: Output file (`tidy_project_data.txt`) has been rounded for more readability

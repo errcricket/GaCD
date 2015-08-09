@@ -1,6 +1,6 @@
 # Coursera: Getting and Cleaning Data Course Project (making untidy data -- tidy)
 
-# Input Date ---------------------
+# Input Date
 1. Original source data came from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
 2. Within unziped directory are the following files:
@@ -19,11 +19,10 @@
 * `UCI_HAR_Dataset/test/y_test.txt` (contains activity order)
 * `UCI_HAR_Dataset/test/X_test.txt` (contains feature variable values)
 
-
 # Running Script
 * Run the R script, `run_analysis_R` to tidy up the data.
 
-# Output Date ---------------------
+# Output Date 
 * tidy_project_data.txt 
 
 #Additional info
