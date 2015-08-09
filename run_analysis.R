@@ -2,6 +2,7 @@ options(width=9999)
 library(plyr)
 library(reshape2)
 
+
 # Get only the mean and standard deviation features from feature.txt file
 #grep mean ../UCI_HAR_Dataset/features.txt | awk '{print $2}' > mean.txt
 #grep std ../UCI_HAR_Dataset/features.txt | awk '{print $2}' > std.txt
@@ -9,15 +10,27 @@ library(reshape2)
 desired_features <- read.table('features.txt', header=F)
 names(desired_features) <- 'saved_features'
 kept_features <- factor(unique(unlist(desired_features$saved_features, use.names = FALSE)))
+#names(kept_features)
+
+features_2 <- read.table('../UCI_HAR_Dataset/features.txt', header=F)
+#features_2
+kept_features2 <- grep(c('mean', 'std'), names(features_2$V2))
+
+#kept_features
+#print('')
+kept_features2
+#print('done')
+
 
 # Loading activity labels and setting name of object to df_name 
+grep(c('mean', 'std'), names(
 activity_labels <- read.csv('../UCI_HAR_Dataset/activity_labels.txt', header=F, sep=' ')
 names(activity_labels) <- c('ActivityID', 'Activity')
 
 # Loading feature labels  Note: there are 561 features (columns)
 feature_labels <- read.csv('../UCI_HAR_Dataset/features.txt', header=F, sep=' ')
 
-## Loading subjects. There are 7532 observations 
+# Loading subjects. There are 7532 observations 
 subjects_training <- read.csv('../UCI_HAR_Dataset/train/subject_train.txt', header=F, sep=' ')
 subjects_testing <- read.csv('../UCI_HAR_Dataset/test/subject_test.txt', header=F, sep=' ') #number of rows: 2947
 names(subjects_training) <- 'subjects'
@@ -61,6 +74,6 @@ complete_df <- rbind(complete_testing, complete_training)
 
 #5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 complete_melt <- melt(complete_df, id=c('subject_id', 'activity'))
-complete_mean <- dcast(complete_melt, subject_id+activity ~ variable, mean)
+complete_mean <- dcast(complete_melt, subject_id+activity ~ variable, mean) #c('subject_id', 'activity') does not appear to work
 complete_mean[] <- lapply(complete_mean, function(x) {if (is.numeric(x)) round(x, 4) else x}) #round values to 4 digits IF numeric
 write.table(complete_mean, file='tidy_project_data.txt', row.name=F, sep=' ', na='NA') #print(temp)
