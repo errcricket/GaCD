@@ -13,18 +13,18 @@ The goal of R script is to create one tidy data set for the average of each vari
 The following files were read into R.
 
 *--------------------Feature/Activity Labels
-* `UCI_HAR_Dataset/activity_labels.txt` (contains 6 descriptive activities w/ numeric values)
-* `UCI_HAR_Dataset/features.txt` (contains 561 variable names in X_t*.txt)
+* `activity_labels.txt` (contains 6 descriptive activities w/ numeric values)
+* `features.txt` (contains 561 variable names in X_t*.txt)
 
 *--------------------Training Data (these files should have the 7352 rows of observations)
-* `UCI_HAR_Dataset/train/subject_train.txt` (contains subject order)
-* `UCI_HAR_Dataset/train/y_train.txt` (contains activity order -- numeric activity values)
-* `UCI_HAR_Dataset/train/X_train.txt` (contains feature variable values)
+* `subject_train.txt` (contains subject order)
+* `y_train.txt` (contains activity order -- numeric activity values)
+* `X_train.txt` (contains feature variable values)
 
 *--------------------Testing Data (these files should have the 2947 rows of observations)
-* `UCI_HAR_Dataset/test/subject_test.txt` (contains subject order)
-* `UCI_HAR_Dataset/test/y_test.txt` (contains activity order -- numeric activity values)
-* `UCI_HAR_Dataset/test/X_test.txt` (contains feature variable values)
+* `subject_test.txt` (contains subject order)
+* `y_test.txt` (contains activity order -- numeric activity values)
+* `X_test.txt` (contains feature variable values)
 
 
 ## Steps 
@@ -37,7 +37,7 @@ You should create one R script called run_analysis.R that does the following.
 3. Uses descriptive activity names to name the activities in the data set
 	* uses `match` to marry activity number to activity descriptive name
 4. Appropriately labels the data set with descriptive variable names. 
-	* uses label names obtained from `UCI_HAR_Dataset/features.txt` file
+	* uses label names obtained from `features.txt` file
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 	* uses melt & dcast to find the mean values for selected columns (step 4). `reshape2` package required
 6. Write tidy dataset to file 
