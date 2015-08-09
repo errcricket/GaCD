@@ -10,22 +10,29 @@ The goal of R script is to create one tidy data set for the average of each vari
 
 ## Files
 
-The following files were read into R.
+The following files were read into R. (variables are listed below file name and are indented)
 
 *--------------------Feature/Activity Labels
 * `activity_labels.txt` (contains 6 descriptive activities w/ numeric values)
-* `features.txt` (contains 561 variable names in X_t*.txt)
+	* activity_labels
+* `features.txt` (contains 561 variable names in X_t*.txt) 
+	* kept_features
 
 *--------------------Training Data (these files should have the 7352 rows of observations)
 * `subject_train.txt` (contains subject order)
+	* subjects_training
 * `y_train.txt` (contains activity order -- numeric activity values)
+	* training_y 
 * `X_train.txt` (contains feature variable values)
+	* training_X
 
 *--------------------Testing Data (these files should have the 2947 rows of observations)
 * `subject_test.txt` (contains subject order)
+	* subjects_testing
 * `y_test.txt` (contains activity order -- numeric activity values)
+	* testing_y 
 * `X_test.txt` (contains feature variable values)
-
+	*testing_X
 
 ## Steps 
 You should create one R script called run_analysis.R that does the following. 
